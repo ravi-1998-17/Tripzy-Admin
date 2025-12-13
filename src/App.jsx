@@ -25,8 +25,7 @@ function App() {
         path="products"
         element={
           <PrivateAdminRoute>
-            {" "}
-            <ProductsList />{" "}
+            <ProductsList />
           </PrivateAdminRoute>
         }
       />
