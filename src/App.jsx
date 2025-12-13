@@ -3,6 +3,7 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import AdminLogin from "./pages/AdminLogin";
 import PrivateAdminRoute from "./components/PrivateAdminRoute";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
 
