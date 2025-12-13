@@ -3,10 +3,13 @@ import AdminHeader from "../components/AdminHeader";
 import { Button, Container, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { deleteProduct, fetchProducts } from "../api/firebaseApi";
+import { useNavigate } from "react-router-dom";
 
 function ProductsList() {
   const [products, setProducts] = useState([]);
   const token = useSelector((state) => state.adminAuth.token);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadProducts();
@@ -57,7 +60,12 @@ function ProductsList() {
                 <td>₹{p.price}</td>
                 <td>{p.quantity}</td>
                 <td>
-                  <Button size="sm" variant="warning" className="me-2">
+                  <Button
+                    size="sm"
+                    variant="warning"
+                    className="me-2"
+                    onClick={() => navigate(`/products/edit/${p.id}`)}
+                  >
                     Edit
                   </Button>
                   <Button
