@@ -5,6 +5,7 @@ import AdminLogin from "./pages/AdminLogin";
 import PrivateAdminRoute from "./components/PrivateAdminRoute";
 import Dashboard from "./pages/Dashboard";
 import ProductsList from "./pages/ProductsList";
+import ProductEdit from "./pages/ProductEdit";
 
 function App() {
   return (
@@ -26,6 +27,15 @@ function App() {
         element={
           <PrivateAdminRoute>
             <ProductsList />
+          </PrivateAdminRoute>
+        }
+      />
+
+      <Route
+        path="/products/edit/:id"
+        element={
+          <PrivateAdminRoute>
+            <ProductEdit />
           </PrivateAdminRoute>
         }
       />
