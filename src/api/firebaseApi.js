@@ -22,15 +22,13 @@ export async function signIn(email, password) {
 
 
 
-// // -----------------------------------------
-// // PRODUCTS
-// // -----------------------------------------
+// PRODUCTS
 
-// // Fetch all products (public)
-// export async function fetchProducts() {
-//   const res = await axios.get(`${DB_URL}/products.json`);
-//   return res.data;
-// }
+// Fetch all products (public)
+export async function fetchProducts() {
+  const res = await axios.get(`${DB_URL}/products.json`);
+  return res.data;
+}
 
 // // Create product (admin)
 // export async function createProduct(product, idToken) {
@@ -51,12 +49,12 @@ export async function signIn(email, password) {
 // }
 
 // // Delete product
-// export async function deleteProduct(productId, idToken) {
-//   const res = await axios.delete(
-//     `${DB_URL}/products/${productId}.json?auth=${idToken}`
-//   );
-//   return res.data;
-// }
+export async function deleteProduct(productId, idToken) {
+  const res = await axios.delete(
+    `${DB_URL}/products/${productId}.json?auth=${idToken}`
+  );
+  return res.data;
+}
 
 // // Update ONLY quantity when order placed
 // export async function updateProductQty(productId, newQty, idToken) {
