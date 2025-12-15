@@ -11,6 +11,8 @@ function ProductsList() {
   const token = useSelector((state) => state.adminAuth.token);
   const navigate = useNavigate();
 
+  console.log(products);
+
   useEffect(() => {
     loadProducts();
   }, []);
