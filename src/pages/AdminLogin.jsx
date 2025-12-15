@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { signIn } from "../api/firebaseApi";
-import adminAuthSlice, { adminLogin } from "../store/slices/adminAuthSlice";
-import { Container } from "react-bootstrap";
+import { adminLogin } from "../store/slices/adminAuthSlice";
+import { Button, Container, Form } from "react-bootstrap";
 
 function AdminLogin() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -20,6 +20,8 @@ function AdminLogin() {
 
     try {
       const data = await signIn(form.email, form.password);
+
+      console.log("LOGIN USER ID:", data.localId);
 
       const userId = data.localId;
       const token = data.idToken;

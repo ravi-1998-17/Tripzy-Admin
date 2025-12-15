@@ -1,32 +1,42 @@
-import { useState } from "react";
-import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import AdminLogin from "./pages/AdminLogin";
-import PrivateAdminRoute from "./components/PrivateAdminRoute";
 import Dashboard from "./pages/Dashboard";
 import ProductsList from "./pages/ProductsList";
+import OrdersList from "./pages/OrdersList";
+import ProductCreate from "./pages/ProductCreate";
 import ProductEdit from "./pages/ProductEdit";
+import PrivateAdminRoute from "./components/PrivateAdminRoute";
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route path="/admin-login" element={<AdminLogin />} />
-        <Route
-          path="dashboard"
-          element={
-            <PrivateAdminRoute>
-              <Dashboard />
-            </PrivateAdminRoute>
-          }
-        />
-      </Routes>
+    <Routes>
+      <Route path="/" element={<Navigate to="/admin-login" />} />
+
+      <Route path="/admin-login" element={<AdminLogin />} />
 
       <Route
-        path="products"
+        path="/dashboard"
+        element={
+          <PrivateAdminRoute>
+            <Dashboard />
+          </PrivateAdminRoute>
+        }
+      />
+
+      <Route
+        path="/products"
         element={
           <PrivateAdminRoute>
             <ProductsList />
+          </PrivateAdminRoute>
+        }
+      />
+
+      <Route
+        path="/products/new"
+        element={
+          <PrivateAdminRoute>
+            <ProductCreate />
           </PrivateAdminRoute>
         }
       />
@@ -39,7 +49,16 @@ function App() {
           </PrivateAdminRoute>
         }
       />
-    </>
+
+      <Route
+        path="/orders"
+        element={
+          <PrivateAdminRoute>
+            <OrdersList />
+          </PrivateAdminRoute>
+        }
+      />
+    </Routes>
   );
 }
 

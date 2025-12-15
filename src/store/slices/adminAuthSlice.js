@@ -31,4 +31,4 @@ const adminAuthSlice = createSlice({
 });
 
 export const { adminLogin, adminLogout } = adminAuthSlice.actions;
-export default adminAuthSlice;
+export default adminAuthSlice.reducer;

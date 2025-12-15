@@ -1,12 +1,12 @@
-import React from "react";
-import { Button, Container, Navbar } from "react-bootstrap";
+import { Button, Container, Navbar, Nav } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { adminLogout } from "../store/slices/adminAuthSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 function AdminHeader() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const email = useSelector((state) => state.adminAuth.email);
 
@@ -14,13 +14,43 @@ function AdminHeader() {
     dispatch(adminLogout());
     navigate("/admin-login");
   }
+
+  // Hide "Create Product" when already on create page
+  const hideCreateBtn = location.pathname === "/products/new";
+
   return (
     <Navbar bg="dark" variant="dark" className="px-3">
       <Container fluid>
-        <Navbar.Brand className="fw-bold">Tripzy Admin</Navbar.Brand>
+        {/* LOGO */}
+        <Navbar.Brand
+          as={Link}
+          to="/dashboard"
+          className="fw-bold"
+          style={{ cursor: "pointer" }}
+        >
+          Tripzy Admin
+        </Navbar.Brand>
 
+        {/* NAV LINKS */}
+        <Nav className="me-auto ms-4 gap-3">
+          <Nav.Link as={Link} to="/products">
+            Products
+          </Nav.Link>
+
+          <Nav.Link as={Link} to="/orders">
+            Orders
+          </Nav.Link>
+
+          {!hideCreateBtn && (
+            <Nav.Link as={Link} to="/products/new">
+              Create Product
+            </Nav.Link>
+          )}
+        </Nav>
+
+        {/* RIGHT SIDE */}
         <div className="d-flex align-items-center gap-3">
-          <span className="text-white">{email}</span>
+          <span className="text-white small">{email}</span>
           <Button variant="outline-light" size="sm" onClick={handleLogout}>
             Logout
           </Button>

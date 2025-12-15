@@ -85,9 +85,7 @@ export async function saveOrder(order, idToken) {
 }
 
 
-// -----------------------------------------
 // ORDERS (ADMIN)
-// -----------------------------------------
 
 // Fetch all orders
 export async function fetchOrders() {

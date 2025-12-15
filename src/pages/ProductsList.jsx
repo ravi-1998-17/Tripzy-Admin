@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import AdminHeader from "../components/AdminHeader";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container, Table, Card, Badge } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { deleteProduct, fetchProducts } from "../api/firebaseApi";
 import { useNavigate } from "react-router-dom";
+import styles from "./ProductsList.module.css";
 
 function ProductsList() {
   const [products, setProducts] = useState([]);
   const token = useSelector((state) => state.adminAuth.token);
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,48 +38,81 @@ function ProductsList() {
     <>
       <AdminHeader />
 
-      <Container className="mt-4">
-        <h3 className="mb-3">Products</h3>
+      <Container className="py-4">
+        {/* HEADER */}
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <h3 className="fw-bold mb-0">Products</h3>
 
-        <Table bordered hover responsive>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Price</th>
-              <th>Qty</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+          <Button onClick={() => navigate("/products/add")}>
+            + Add Product
+          </Button>
+        </div>
 
-          <tbody>
-            {products.map((p) => (
-              <tr key={p.id}>
-                <td>{p.name}</td>
-                <td>{p.category}</td>
-                <td>₹{p.price}</td>
-                <td>{p.quantity}</td>
-                <td>
-                  <Button
-                    size="sm"
-                    variant="warning"
-                    className="me-2"
-                    onClick={() => navigate(`/products/edit/${p.id}`)}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="danger"
-                    onClick={() => handleDelete(p.id)}
-                  >
-                    Delete
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+        {/* TABLE CARD */}
+        <Card className="shadow-sm border-0">
+          <Card.Body className="p-0">
+            <Table hover responsive className="mb-0 align-middle">
+              <thead className={styles.tableHead}>
+                <tr>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Qty</th>
+                  <th className="text-center">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {products.map((p) => (
+                  <tr key={p.id}>
+                    <td className={styles.productName}>{p.name}</td>
+
+                    <td>
+                      <Badge bg="secondary">{p.category}</Badge>
+                    </td>
+
+                    <td className="fw-semibold">₹{p.price}</td>
+
+                    <td>
+                      {p.quantity > 0 ? (
+                        <Badge bg="success">{p.quantity}</Badge>
+                      ) : (
+                        <Badge bg="danger">Out of stock</Badge>
+                      )}
+                    </td>
+
+                    <td className="text-center">
+                      <Button
+                        size="sm"
+                        variant="outline-warning"
+                        className="me-2"
+                        onClick={() => navigate(`/products/edit/${p.id}`)}
+                      >
+                        Edit
+                      </Button>
+
+                      <Button
+                        size="sm"
+                        variant="outline-danger"
+                        onClick={() => handleDelete(p.id)}
+                      >
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+
+                {products.length === 0 && (
+                  <tr>
+                    <td colSpan="5" className="text-center py-4 text-muted">
+                      No products found
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </Table>
+          </Card.Body>
+        </Card>
       </Container>
     </>
   );
