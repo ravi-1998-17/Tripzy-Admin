@@ -15,13 +15,11 @@ function AdminHeader() {
     navigate("/admin-login");
   }
 
-  // Hide "Create Product" when already on create page
   const hideCreateBtn = location.pathname === "/products/new";
 
   return (
     <Navbar bg="dark" variant="dark" className="px-3">
       <Container fluid>
-        {/* LOGO */}
         <Navbar.Brand
           as={Link}
           to="/dashboard"
@@ -31,7 +29,6 @@ function AdminHeader() {
           Tripzy Admin
         </Navbar.Brand>
 
-        {/* NAV LINKS */}
         <Nav className="me-auto ms-4 gap-3">
           <Nav.Link as={Link} to="/products">
             Products
@@ -48,7 +45,6 @@ function AdminHeader() {
           )}
         </Nav>
 
-        {/* RIGHT SIDE */}
         <div className="d-flex align-items-center gap-3">
           <span className="text-white small">{email}</span>
           <Button variant="outline-light" size="sm" onClick={handleLogout}>

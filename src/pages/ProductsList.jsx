@@ -50,7 +50,6 @@ function ProductsList() {
           </Button>
         </div>
 
-        {/* TABLE CARD */}
         <Card className="shadow-sm border-0">
           <Card.Body className="p-0">
             <Table hover responsive className="mb-0 align-middle">

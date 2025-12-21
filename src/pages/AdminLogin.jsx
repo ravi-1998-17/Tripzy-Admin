@@ -26,7 +26,6 @@ function AdminLogin() {
       const userId = data.localId;
       const token = data.idToken;
 
-      // CHECK IF ADMIN IN FIREBASE DB
       const roleRes = await axios.get(
         `https://tripzy-de9a4-default-rtdb.firebaseio.com/users/${userId}/role.json?auth=${token}`
       );

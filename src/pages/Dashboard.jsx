@@ -10,7 +10,6 @@ function Dashboard() {
       <AdminHeader />
 
       <Container className="py-4">
-        {/* HEADER */}
         <div className="mb-4">
           <h3 className="fw-bold">Admin Dashboard</h3>
           <p className="text-muted mb-0">
@@ -18,9 +17,7 @@ function Dashboard() {
           </p>
         </div>
 
-        {/* DASHBOARD CARDS */}
         <Row className="g-4">
-          {/* PRODUCTS */}
           <Col md={4}>
             <Link to="/products" className={styles.cardLink}>
               <Card className={`${styles.dashboardCard} ${styles.product}`}>
@@ -35,7 +32,6 @@ function Dashboard() {
             </Link>
           </Col>
 
-          {/* ORDERS */}
           <Col md={4}>
             <Link to="/orders" className={styles.cardLink}>
               <Card className={`${styles.dashboardCard} ${styles.orders}`}>
@@ -50,7 +46,6 @@ function Dashboard() {
             </Link>
           </Col>
 
-          {/* USERS (OPTIONAL – FUTURE READY) */}
           <Col md={4}>
             <Card className={`${styles.dashboardCard} ${styles.users}`}>
               <div className={styles.iconBox}>
